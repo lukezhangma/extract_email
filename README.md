@@ -1,11 +1,9 @@
 Validity: Microservice That Transforms Email Message 
 ==========================================================================
 
-**validity.tar.gz** contains three directories, such as:
-|____doc
-|____k8s
-|____web
-This document is contained inside `doc` directory.
+This project contains two directories, such as:
+`k8s`,`web`
+
 `k8s` contains ansible scripts that are used for deploying service on AWS EKS service. Unfortuately, I never have time to configure 'minikube' on my computer.
 `web` contains a Django Web project which can be dockerized to run on your local desktop or on cloud.
 
@@ -48,7 +46,7 @@ For building docker image of web service.
 ```
 
 ```ini
-[web/requirements]
+[web/requirements.txt]
 Contains required software dor web service to be installed in container.
 ```
 
