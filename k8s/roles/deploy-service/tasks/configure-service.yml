@@ -1,0 +1,7 @@
+# Apply kubernetes resources (emailservice.yml.j2) to deploy email service in k8s
+- name: Set email service resource states to {{ state }} using image version {{ validity_version }}
+  k8s:
+    context: "arn:aws:eks:{{ region }}:{{ aws_account_id }}:cluster/{{ eks_cluster_name }}"
+    namespace: email
+    resource_definition: "{{ lookup('template', 'emailservice.yml.j2') }}"
+    state: "{{ state }}"

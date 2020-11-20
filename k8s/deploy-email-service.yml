@@ -1,0 +1,15 @@
+---
+# Deploy the application into the provisioned environment
+- hosts: local
+  gather_facts: false
+  vars:
+    state: present
+
+  roles:
+    - role: initialization
+
+  tasks:
+    - name: Create email service
+      import_role:
+        name: deploy-service
+        tasks_from: configure-service.yml

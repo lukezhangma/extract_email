@@ -1,0 +1,79 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-service
+  labels:
+    app: validity
+    version: 1.0.0
+spec:
+  replicas:  1
+  selector:
+    matchLabels:
+      app: validity
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 50%
+  template:
+    metadata:
+      labels:
+        app: validity
+        version: 1.0.0
+      annotations:
+        iam.amazonaws.com/role: {{ email_service_role }}
+    spec:
+      volumes:
+      - name: email-volume
+        persistentVolumeClaim:
+        claimName: email-pv-claim
+
+      containers:
+      - image: {{ aws_account_id }}.dkr.ecr.{{ region }}.amazonaws.com/validity:1.0.0
+        imagePullPolicy: Always
+        name: validity
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: 1
+          requests:
+            memory: 1Gi
+            cpu: 1
+
+        ports:
+          - containerPort: 8000
+            name: http
+            protocol: TCP
+        volumeMounts:
+        - name: email-volume
+          mountPath: /var/lib/email
+
+		  ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: email-pv-claim
+  labels:
+    app: validity
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: email-service
+  labels:
+    app: validity
+spec:
+  selector:
+    app: validity
+  ports:
+   - protocol: TCP
+    name: tcp
+    port: 8000
+    targetPort: 8000

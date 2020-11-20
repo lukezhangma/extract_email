@@ -1,0 +1,6 @@
+---
+region: "us-east-1"
+aws_account_id: 1234567899
+eks_cluster_name: validity-emails
+email_service_role: extract-email-data-role
+validity_version: 1.0.0
