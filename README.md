@@ -10,25 +10,21 @@ This project contains two directories, such as:
 
 Installation:
 -------------
-First decompress the gzip file:
-```sh
-$ tar -xzvf  validity.tar.gz
-```
 
-Secondly, go into `web` directory, build docker image, I assume you already have `docker` installed:
+First method, go into `web` directory, build docker image, I assume you already have `docker` installed:
 ```sh
 1. You could start web server from `web/validity` directory by running(assuming Python and Django are installed):
 2. python ./manage.py runserver
 ```
 
-Or dockerize the web service by:
+Second way is to dockerize the web service by:
 ```sh
 1. $ docker build -t validity .
 2. You could run the image on your local machine by:
 3. $ docker run --name email -p 8000:8000 -d validity
 ```
 
-Or go to `k8s` directory, run playbook to deploy it on AWS EKS,
+Third way is to go to `k8s` directory, run playbook to deploy it on AWS EKS,
 we assume you have build docker image and push it to ECR service:
 ```sh
 1. $ ansible-playbook deploy-email-service.yml
