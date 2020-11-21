@@ -11,13 +11,18 @@ This project contains two directories, such as:
 Installation:
 -------------
 
-First method, go into `web` directory, build docker image, I assume you already have `docker` installed:
+First method, go to `web` directory, run the web server(Python, Django required):
 ```sh
 1. You could start web server from `web/validity` directory by running(assuming Python and Django are installed):
 2. python ./manage.py runserver
 ```
+Then you could use Http client software, `curl` or `Nightingale` to test the web service:
+The url is `http://localhost:8000/email/`
+```sh
+1. curl -X POST -d <email  message> http://localhost:8000/email/
+```
 
-Second way is to dockerize the web service by:
+Second way is to dockerize the web service by(I assume you already have `docker` installed):
 ```sh
 1. $ docker build -t validity .
 2. You could run the image on your local machine by:
@@ -43,12 +48,12 @@ For building docker image of web service.
 
 ```ini
 [web/requirements.txt]
-Contains required software dor web service to be installed in container.
+Contains dependency software for web service to be installed in container.
 ```
 
 ```ini
 [web/validity/process_email]
-This is the directory containing email REST service application, where when a POST request is called from client, this application respond to the request.
+This is the directory containing REST serviceof email application, where when a POST request is called from client, this application respond to the request.
 ```
 
 ```ini
