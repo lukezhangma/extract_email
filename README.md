@@ -19,7 +19,7 @@ First method, go to `web` directory, run the web server(Python, Django required)
 Then you could use Http client software, `curl` or `Nightingale` to test the web service:
 The url is `http://localhost:8000/email/`
 ```sh
-1. curl -X POST -d <email  message> http://localhost:8000/email/
+1. curl -X POST --data-binary <email  message> http://localhost:8000/email/
 ```
 
 Second way is to dockerize the web service by(I assume you already have `docker` installed):
