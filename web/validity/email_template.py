@@ -2,9 +2,9 @@
 class Template: 
 
     # The fields that will be parsed to JSON files from email
-    email_template = { 'To': '^To:(.*)(\r|\r\n)',
-                 'From': '^From:(.*)(\r|\r\n)',
-                 'Date': '^Date:(.*)(\r|\r\n)',
-                 'Subject': '^Subject:(.*)(\r|\r\n)',
-                 'Message-ID': '^Message-ID:(.*)(\r|\r\n)'
+    email_template = { 'To': '^To:(.*)(\n|\r\n)',
+                 'From': '^From:(.*)(\n|\r\n)',
+                 'Date': '^Date:(.*)(\n|\r\n)',
+                 'Subject': '^Subject:(.*)(\n|\r\n)',
+                 'Message-ID': '^Message-ID:(.*)(\n|\r\n)'
                 }
